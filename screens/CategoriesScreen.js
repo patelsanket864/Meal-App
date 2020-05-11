@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, FlatList,TouchableNativeFeedback } from 'react-native';
 import {CATEGORIES} from '../Data/Dummy-data';
-import Colors from '../components/Colors';
+import {HeaderButtons,Item} from 'react-navigation-header-buttons';
+import {Ionicons} from '@expo/vector-icons';
+import {HeaderButton} from '../components/HeaderButton';
 
 const CategoriesScreen=props=>{
   const renderGridItem=(itemData)=>{
@@ -30,6 +32,21 @@ const CategoriesScreen=props=>{
     )
 }
 
+
+CategoriesScreen.navigationOptions=(navData)=>{
+  return{
+    headerTitle : 'Filter Screen',
+    headerLeft : ()=><HeaderButtons HeaderButtonComponent={HeaderButton}>
+      <Item 
+        iconName="ios-menu"
+        title="Menu"
+        onPress={()=>{
+          navData.navigation.toggleDrawer();
+        }}
+      />
+    </HeaderButtons>
+  }
+}
 
 const styles = StyleSheet.create({
   screen: {

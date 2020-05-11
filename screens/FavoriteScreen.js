@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList} from 'react-native';
-import {MEALS} from '../Data/Dummy-data';
+import  {useSelector} from 'react-redux';
 import MealItem from '../components/MealItem'
 const FavoriteScreen=props=>{
+  const meals = useSelector(state=>state.meals.favoriteMeals);
 
-  const meals = MEALS.filter(meal=>meal.id==='m1' || meal.id==='m2');
+  if(meals.length === 0 || !meals){
+    return <View style={styles.screen}>
+      <Text>No Favorite meal found..!! Start adding some!</Text>
+    </View>
+  }
   const renderMealItem=itemData=>{
     return <MealItem 
       title={itemData.item.title} 
